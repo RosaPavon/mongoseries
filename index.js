@@ -3,14 +3,16 @@ const mongodb=require("mongodb")
 const MongoClient = mongodb.MongoClient
 const app=express()
 let db
-app.use (express.static("public"))
-app.use (express.urlencoded({extended:false}))
+app.use (express.static("public"))//para la carpeta public
+app.use (express.urlencoded({extended:false}))//recibe un objeto
 app.use(express.json)
 MongoClient.connect(
     "mongodb://localhost:27017",
     { useNewUrlParser: true, useUnifiedTopology: true },
     function (error, client) {
-      error ? console.log(error) : (db = client.db("series"));
+      error 
+      ? console.log(error) 
+      : (db = client.db("series"));
     }
   );
 
@@ -24,7 +26,7 @@ MongoClient.connect(
 
   app.get("/api/series/:titulo", function (req, res) {
     db.collection("series")
-      .find({ titulo: { $regex: `${req.params.titulo}` } })
+      .find({ titulo: {$regex:' ${req.query.titulo}'}})//se usa el query porque viene de un formulario
       .toArray(function (error, datos) {
         error
           ? res.send({ error: true, contenido: error })
@@ -32,7 +34,7 @@ MongoClient.connect(
       })
   })
 
-  app.post("/api/nuevaSerie/:titulo", function (req, res) {
+  app.post("/api/nuevaSerie", function (req, res) {
     db.collection("series").insertOne(
       { titulo: req.body.titulo,plataforma: req.body.titulo,nota: req.body.nota},
       function (error, datos) {

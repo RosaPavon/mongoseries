@@ -7,20 +7,18 @@
     <title>Series</title>
 </head>
 <body>
-    <button onclick="mostrarLista()">Todos</button>
+    <div id="series"></div>
     <div>
-        <form action="/api/series/:titulo"> 
-            <input type="text" placeholder="buscar" name="buscar" >
-            <button type="submit">buscar</button>
-        </form>
+            <input type="text" placeholder="buscar" id="titulo"/>
+            <button onclick="buscar()">buscar</button>
     </div>
     <div>
-        <form name="formulario"> 
-            <input type="text" placeholder="titulo" name= "titulo" id= "titulo" />
-            <input type="text" placeholder="plataforma" name= "plataforma" id= "plataforma" />
-            <input type="text" placeholder="nota" name= "nota" id= "nota"/>
-            <button type="submit">Enviar</button>
-        </form>
+        <div> 
+            <input type="text" placeholder="titulo"  id= "titulo2" />
+            <input type="text" placeholder="plataforma"  id= "plataforma" />
+            <input type="text" placeholder="nota"  id= "nota"/>
+            <button onclick="anyadir()">Añadir</button>
+        </div>
     </div>
     <div id="feedback"></div>
     <script src="index.js"></script>
